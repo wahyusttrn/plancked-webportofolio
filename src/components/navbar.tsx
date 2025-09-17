@@ -8,10 +8,6 @@ const Navbar: React.FC = () => {
 
   const navLinks: { title: string; route: string }[] = [
     {
-      title: 'home',
-      route: '/'
-    },
-    {
       title: '3d',
       route: '/3d'
     },
@@ -26,11 +22,15 @@ const Navbar: React.FC = () => {
   ];
 
   return (
-    <nav className="bg-background font-sans font-bold w-dvw h-16 md:px-32 px-10 flex items-center justify-end fixed top-0 right-0 z-50">
+    <nav className="bg-background font-sans font-bold w-dvw h-16 md:px-32 px-10 flex items-center justify-between fixed top-0 right-0 z-50">
+      <Link className="py-4 px-5 italic hover:underline text-foreground" href={'/'}>
+        (ħ)
+      </Link>
+
       {/* Desktop */}
       <div className="hidden md:flex items-center justify-between">
         {navLinks.map((navLink, i) => (
-          <Link key={i} className="py-4 px-5 uppercase hover:underline" href={navLink.route}>
+          <Link key={i} className="py-4 px-5 uppercase hover:underline text-foreground" href={navLink.route}>
             {navLink.title}
           </Link>
         ))}
