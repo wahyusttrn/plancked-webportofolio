@@ -25,8 +25,8 @@ const LogoShowcase: React.FC = () => {
       scene.add(directionalLight);
 
       // Position camera
-      camera.position.z = 10;
-      camera.position.y = 2;
+      camera.position.z = 15; // Start farther away
+      camera.position.y = 3;
       camera.lookAt(0, 3, 0);
 
       let loadedObject: THREE.Group | null = null;
@@ -57,14 +57,36 @@ const LogoShowcase: React.FC = () => {
       });
 
       let scrollPosition = 0;
+
       const handleScroll = () => {
         scrollPosition = window.scrollY * 0.006;
+        const scrollProgress = Math.min(window.scrollY / (window.innerHeight * 0.5), 1);
+
+        // Direct camera position update
+        camera.position.z = 15 - 5 * scrollProgress;
+        camera.position.y = 3 - scrollProgress * 0.5;
+        camera.lookAt(0, 3 - scrollProgress * 0.5, 0);
       };
       window.addEventListener('scroll', handleScroll);
 
       const renderScene = () => {
         if (loadedObject) {
           loadedObject.rotation.y = scrollPosition;
+
+          // Calculate color transition with delayed start (starts at 95% scroll)
+          const scrollProgress = Math.min(window.scrollY / (window.innerHeight * 0.5), 2); // Allow progress up to 200%
+          const colorProgress = Math.max(0, Math.min(1, (scrollProgress - 1.8) * 2.5)); // Slower transition
+
+          // Interpolate between black and red
+          const currentColor = new THREE.Color();
+          currentColor.lerpColors(new THREE.Color(0x000000), new THREE.Color(0xd70000), colorProgress);
+
+          // Apply the color
+          loadedObject.traverse((child) => {
+            if (child instanceof THREE.Mesh) {
+              (child.material as THREE.MeshPhongMaterial).color = currentColor;
+            }
+          });
         }
         renderer.render(scene, camera);
         requestAnimationFrame(renderScene);
