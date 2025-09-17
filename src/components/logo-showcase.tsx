@@ -91,7 +91,15 @@ const LogoShowcase: React.FC = () => {
     }
   }, []);
 
-  return <div ref={containerRef} />;
+  return (
+    <div
+      ref={containerRef}
+      style={{
+        width: '100vw',
+        height: '100vh'
+      }}
+    />
+  );
 };
 
 export default LogoShowcase;

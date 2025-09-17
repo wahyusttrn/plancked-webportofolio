@@ -1,13 +1,25 @@
 import LogoShowcase from '@/components/logo-showcase';
+import Navbar from '@/components/navbar';
 import Image from 'next/image';
 
 export default function Home() {
   return (
-    <>
-      <header>
-        <LogoShowcase />
+    <div className="font-sans">
+      <Navbar />
+      <header className="">
+        <div className="absolute bottom-24 left-1/12">
+          <p className="font-bold italic">(h)</p>
+          <p>
+            <b>Plancked.</b> quick tour
+          </p>
+        </div>
+        <div className="">
+          <LogoShowcase />
+        </div>
       </header>
-      <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
+      <p className="font-bold italic text-center text-xl py-5">(ħ)</p>
+
+      <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
         <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
           <Image className="dark" src="/next.svg" alt="Next.js logo" width={180} height={38} priority />
           <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
@@ -69,6 +81,6 @@ export default function Home() {
           </a>
         </footer>
       </div>
-    </>
+    </div>
   );
 }
