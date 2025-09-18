@@ -4,17 +4,21 @@ import React, { useRef, useEffect } from 'react';
 import * as THREE from 'three';
 import { OBJLoader } from 'three/addons/loaders/OBJLoader.js';
 
+THREE.ColorManagement.enabled = true;
+
 const LogoShowcase: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const scene = new THREE.Scene();
-      scene.background = new THREE.Color(0xffffff);
+      scene.background = null;
 
       const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-      const renderer = new THREE.WebGLRenderer({ antialias: true });
+      const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
       renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.toneMapping = THREE.NeutralToneMapping;
+      renderer.outputColorSpace = THREE.SRGBColorSpace;
       containerRef.current?.appendChild(renderer.domElement);
 
       // Add lights
@@ -25,7 +29,7 @@ const LogoShowcase: React.FC = () => {
       scene.add(directionalLight);
 
       // Position camera
-      camera.position.z = 15; // Start farther away
+      camera.position.z = 15;
       camera.position.y = 3;
       camera.lookAt(0, 3, 0);
 
@@ -73,15 +77,13 @@ const LogoShowcase: React.FC = () => {
         if (loadedObject) {
           loadedObject.rotation.y = scrollPosition;
 
-          // Calculate color transition with delayed start (starts at 95% scroll)
-          const scrollProgress = Math.min(window.scrollY / (window.innerHeight * 0.5), 2); // Allow progress up to 200%
-          const colorProgress = Math.max(0, Math.min(1, (scrollProgress - 1.8) * 2.5)); // Slower transition
+          // Color object transition
+          const scrollProgress = Math.min(window.scrollY / (window.innerHeight * 0.5), 2);
+          const colorProgress = Math.max(0, Math.min(1, (scrollProgress - 1.8) * 2.8));
 
-          // Interpolate between black and red
           const currentColor = new THREE.Color();
           currentColor.lerpColors(new THREE.Color(0x000000), new THREE.Color(0xd70000), colorProgress);
 
-          // Apply the color
           loadedObject.traverse((child) => {
             if (child instanceof THREE.Mesh) {
               (child.material as THREE.MeshPhongMaterial).color = currentColor;

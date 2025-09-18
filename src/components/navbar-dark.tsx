@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import React, { useState } from 'react';
 
-const Navbar: React.FC = () => {
+const NavbarDark: React.FC<{ opacity: number }> = ({ opacity }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navLinks: { title: string; route: string }[] = [
@@ -22,15 +22,18 @@ const Navbar: React.FC = () => {
   ];
 
   return (
-    <nav className="font-sans font-bold w-dvw h-16 md:px-32 px-10 flex items-center justify-between fixed top-0 right-0 z-50">
-      <Link className="py-4 px-5 italic hover:underline text-foreground" href={'/'}>
+    <nav
+      className="text-redish font-sans font-bold w-dvw h-16 md:px-32 px-10 flex items-center justify-between fixed top-0 right-0 z-[999]"
+      style={{ opacity }}
+    >
+      <Link className="py-4 px-5 italic hover:underline" href={'/'}>
         (ħ)
       </Link>
 
       {/* Desktop */}
       <div className="hidden md:flex items-center justify-between">
         {navLinks.map((navLink, i) => (
-          <Link key={i} className="py-4 px-5 uppercase hover:underline text-foreground" href={navLink.route}>
+          <Link key={i} className="py-4 px-5 uppercase hover:underline" href={navLink.route}>
             {navLink.title}
           </Link>
         ))}
@@ -43,22 +46,22 @@ const Navbar: React.FC = () => {
         aria-label="Toggle menu"
       >
         <span
-          className={`block w-8 h-0.5 bg-foreground transform transition duration-300 ease-in-out
+          className={`block w-8 h-0.5 bg-redish transform transition duration-300 ease-in-out
             ${isOpen ? 'rotate-45 translate-y-2' : ''}`}
         />
         <span
-          className={`block w-8 h-0.5 bg-foreground transition-opacity duration-300
+          className={`block w-8 h-0.5 bg-redish transition-opacity duration-300
             ${isOpen ? 'opacity-0' : ''}`}
         />
         <span
-          className={`block w-8 h-0.5 bg-foreground transform transition duration-300 ease-in-out
+          className={`block w-8 h-0.5 bg-redish transform transition duration-300 ease-in-out
             ${isOpen ? '-rotate-45 -translate-y-2' : ''}`}
         />
       </button>
 
       {/* Mobile Menu */}
       <div
-        className={`fixed md:hidden top-0 right-0 w-full h-screen bg-background transform transition-transform duration-300 ease-in-out
+        className={`fixed md:hidden top-0 right-0 w-full h-screen bg-sec-background transform transition-transform duration-300 ease-in-out
           ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}
       >
         <div className="flex flex-col items-center justify-center h-full space-y-8">
@@ -78,4 +81,4 @@ const Navbar: React.FC = () => {
   );
 };
 
-export default Navbar;
+export default NavbarDark;
