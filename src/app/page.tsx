@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import NavbarDark from '@/components/navbar-dark';
 import Navbar from '@/components/navbar';
 import BlinkingEdge from '@/components/blinking-edge';
-import Link from 'next/link';
+import VideoPlayer from '@/components/video-player';
 
 export default function Home() {
   const [textOpacity, setTextOpacity] = useState(0);
@@ -68,9 +68,16 @@ export default function Home() {
 
         <p className="font-bold italic text-center text-xl py-5 text-redish">(ħ)</p>
 
-        <section className="">
-          <div className="flex items-center justify-center min-h-screen">
-            <h1 className="text-redish">Hello.</h1>
+        <section className="relative w-screen flex justify-center mt-10">
+          <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-3 justify-center min-h-screen w-4/5">
+            <VideoPlayer
+              src="/works/3d/gnine.mp4"
+              thumbnailSrc="/works/3d/gnine_thumbnail.png"
+              className="w-full md:col-span-3 sm:col-span-2"
+            />
+            <VideoPlayer src="/works/3d/maba_party.mp4" className="w-full" />
+            <VideoPlayer src="/works/3d/chariot.mp4" className="w-full" />
+            <VideoPlayer src="/works/3d/soul_essence.mp4" className="w-full" />
           </div>
         </section>
       </div>
