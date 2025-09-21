@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import React, { useState } from 'react';
 
-const NavbarDark: React.FC<{ opacity: number; display?: string }> = ({ opacity, display = 'flex' }) => {
+const NavbarDark: React.FC<{ opacity?: number; display?: string }> = ({ opacity = 1, display = 'flex' }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navLinks: { title: string; route: string }[] = [
