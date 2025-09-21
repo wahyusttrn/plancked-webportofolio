@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import NavbarDark from '@/components/navbar-dark';
 import Navbar from '@/components/navbar';
 import BlinkingEdge from '@/components/blinking-edge';
+import Link from 'next/link';
 
 export default function Home() {
   const [textOpacity, setTextOpacity] = useState(0);
