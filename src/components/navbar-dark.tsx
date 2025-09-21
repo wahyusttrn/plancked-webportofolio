@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import React, { useState } from 'react';
 
-const NavbarDark: React.FC<{ opacity: number }> = ({ opacity }) => {
+const NavbarDark: React.FC<{ opacity: number; display?: string }> = ({ opacity, display = 'flex' }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navLinks: { title: string; route: string }[] = [
@@ -24,7 +24,7 @@ const NavbarDark: React.FC<{ opacity: number }> = ({ opacity }) => {
   return (
     <nav
       className="text-redish font-sans font-bold w-dvw h-16 md:px-32 px-10 flex items-center justify-between fixed top-0 right-0 z-[999]"
-      style={{ opacity }}
+      style={{ opacity, display }}
     >
       <Link className="py-4 px-5 italic hover:underline" href={'/'}>
         (ħ)

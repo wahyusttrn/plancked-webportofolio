@@ -2,7 +2,6 @@
 
 import LogoShowcase from '@/components/logo-showcase';
 import { useState, useEffect } from 'react';
-import Image from 'next/image';
 import NavbarDark from '@/components/navbar-dark';
 import Navbar from '@/components/navbar';
 import BlinkingEdge from '@/components/blinking-edge';
@@ -10,6 +9,7 @@ import BlinkingEdge from '@/components/blinking-edge';
 export default function Home() {
   const [textOpacity, setTextOpacity] = useState(0);
   const [overlayOpacity, setOverlayOpacity] = useState(0);
+  const [display, setDisplay] = useState('none');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,6 +20,12 @@ export default function Home() {
 
       const overlayOpacity = Math.max(0, Math.min(1, (scrollProgress - 1.9) * 10));
       setOverlayOpacity(overlayOpacity);
+      console.log(overlayOpacity);
+      if (overlayOpacity > 0) {
+        setDisplay('flex');
+      } else {
+        setDisplay('none');
+      }
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -28,9 +34,9 @@ export default function Home() {
 
   return (
     <>
-      <NavbarDark opacity={overlayOpacity} />
+      <NavbarDark opacity={overlayOpacity} display={display} />
       <Navbar /> {/* this is still bad, doubled navbar */}
-      <div className="font-sans bg-sec-background">
+      <div className="font-sans bg-sec-background z-50">
         <header className="relative">
           <div className="h-[230vh]">
             <div className="h-screen w-screen sticky top-0 transition-all duration-300">
@@ -67,7 +73,7 @@ export default function Home() {
           </div>
         </section>
       </div>
-      <BlinkingEdge opacity={overlayOpacity} />
+      <BlinkingEdge opacity={overlayOpacity} display={display} />
     </>
   );
 }
