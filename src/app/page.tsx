@@ -72,12 +72,24 @@ export default function Home() {
           <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-3 justify-center min-h-screen w-4/5">
             <VideoPlayer
               src="/works/3d/gnine.mp4"
-              thumbnailSrc="/works/3d/gnine_thumbnail.png"
+              thumbnailSrc="/works/thumbnail/3d/gnine_thumbnail.png"
               className="w-full md:col-span-3 sm:col-span-2"
             />
-            <VideoPlayer src="/works/3d/maba_party.mp4" className="w-full" />
-            <VideoPlayer src="/works/3d/chariot.mp4" className="w-full" />
-            <VideoPlayer src="/works/3d/soul_essence.mp4" className="w-full" />
+            <VideoPlayer
+              src="/works/3d/maba_party.mp4"
+              thumbnailSrc="/works/thumbnail/3d/maba_party.png"
+              className="w-full"
+            />
+            <VideoPlayer
+              src="/works/3d/chariot.mp4"
+              thumbnailSrc="/works/thumbnail/3d/chariot.png"
+              className="w-full"
+            />
+            <VideoPlayer
+              src="/works/3d/soul_essence.mp4"
+              thumbnailSrc="/works/thumbnail/3d/soul_essence.png"
+              className="w-full"
+            />
           </div>
         </section>
       </div>
