@@ -21,7 +21,7 @@ const TwoDPage = () => {
         <section className="relative w-screen flex justify-center mt-10">
           <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-3 justify-center min-h-screen w-4/5">
             {works.map((e, i) => {
-              if (e.type !== 'pamflet') {
+              if (e.type === '2d') {
                 return (
                   <VideoPlayer
                     key={i}
@@ -30,7 +30,7 @@ const TwoDPage = () => {
                     className={`w-full ${e.space === 'wide' && 'md:col-span-3 sm:col-span-2'}`}
                   />
                 );
-              } else {
+              } else if (e.type === 'pamflet') {
                 return (
                   <Image
                     key={i}
