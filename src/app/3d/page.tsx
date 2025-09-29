@@ -4,7 +4,6 @@ import BlinkingEdge from '@/components/blinking-edge';
 import NavbarDark from '@/components/navbar-dark';
 import VideoPlayer from '@/components/video-player';
 import { works } from '@/db/works';
-import Image from 'next/image';
 
 const ThreeDPage = () => {
   return (
@@ -21,23 +20,12 @@ const ThreeDPage = () => {
         <section className="relative w-screen flex justify-center mt-10">
           <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-3 justify-center min-h-screen w-4/5">
             {works.map((e, i) => {
-              if (e.type !== 'pamflet') {
+              if (e.type === '3d') {
                 return (
                   <VideoPlayer
                     key={i}
                     src={`/works/${e.type}/${e.title}.mp4`}
                     thumbnailSrc={`/works/thumbnail/${e.type}/${e.title}.png`}
-                    className={`w-full ${e.space === 'wide' && 'md:col-span-3 sm:col-span-2'}`}
-                  />
-                );
-              } else {
-                return (
-                  <Image
-                    key={i}
-                    src={`/works/pamflet/${e.title}.png`}
-                    width={400}
-                    height={400}
-                    alt={e.title}
                     className={`w-full ${e.space === 'wide' && 'md:col-span-3 sm:col-span-2'}`}
                   />
                 );
