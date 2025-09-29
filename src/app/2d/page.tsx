@@ -27,7 +27,7 @@ const TwoDPage = () => {
                     key={i}
                     src={`/works/${e.type}/${e.title}.mp4`}
                     thumbnailSrc={`/works/thumbnail/${e.type}/${e.title}.png`}
-                    className={`w-full ${e.space === 'wide' && 'md:col-span-3 sm:col-span-2'}`}
+                    className={`w-full z-50 ${e.space === 'wide' && 'md:col-span-3 sm:col-span-2'}`}
                   />
                 );
               } else if (e.type === 'pamflet') {
@@ -38,7 +38,7 @@ const TwoDPage = () => {
                     width={400}
                     height={400}
                     alt={e.title}
-                    className={`w-full ${e.space === 'wide' && 'md:col-span-3 sm:col-span-2'}`}
+                    className={`w-full z-50 ${e.space === 'wide' && 'md:col-span-3 sm:col-span-2'}`}
                   />
                 );
               }

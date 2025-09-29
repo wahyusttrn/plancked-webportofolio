@@ -26,7 +26,7 @@ const ThreeDPage = () => {
                     key={i}
                     src={`/works/${e.type}/${e.title}.mp4`}
                     thumbnailSrc={`/works/thumbnail/${e.type}/${e.title}.png`}
-                    className={`w-full ${e.space === 'wide' && 'md:col-span-3 sm:col-span-2'}`}
+                    className={`w-full z-50 ${e.space === 'wide' && 'md:col-span-3 sm:col-span-2'}`}
                   />
                 );
               }
