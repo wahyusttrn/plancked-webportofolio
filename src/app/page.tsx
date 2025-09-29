@@ -6,6 +6,8 @@ import NavbarDark from '@/components/navbar-dark';
 import Navbar from '@/components/navbar';
 import BlinkingEdge from '@/components/blinking-edge';
 import VideoPlayer from '@/components/video-player';
+import Image from 'next/image';
+import { works } from '@/db/works';
 
 export default function Home() {
   const [textOpacity, setTextOpacity] = useState(0);
@@ -21,7 +23,6 @@ export default function Home() {
 
       const overlayOpacity = Math.max(0, Math.min(1, (scrollProgress - 1.9) * 10));
       setOverlayOpacity(overlayOpacity);
-      console.log(overlayOpacity);
       if (overlayOpacity > 0) {
         setDisplay('flex');
       } else {
@@ -70,26 +71,29 @@ export default function Home() {
 
         <section className="relative w-screen flex justify-center mt-10">
           <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-3 justify-center min-h-screen w-4/5">
-            <VideoPlayer
-              src="/works/3d/gnine.mp4"
-              thumbnailSrc="/works/thumbnail/3d/gnine_thumbnail.png"
-              className="w-full md:col-span-3 sm:col-span-2"
-            />
-            <VideoPlayer
-              src="/works/3d/maba_party.mp4"
-              thumbnailSrc="/works/thumbnail/3d/maba_party.png"
-              className="w-full"
-            />
-            <VideoPlayer
-              src="/works/3d/chariot.mp4"
-              thumbnailSrc="/works/thumbnail/3d/chariot.png"
-              className="w-full"
-            />
-            <VideoPlayer
-              src="/works/3d/soul_essence.mp4"
-              thumbnailSrc="/works/thumbnail/3d/soul_essence.png"
-              className="w-full"
-            />
+            {works.map((e, i) => {
+              if (e.type !== 'pamflet') {
+                return (
+                  <VideoPlayer
+                    key={i}
+                    src={`/works/${e.type}/${e.title}.mp4`}
+                    thumbnailSrc={`/works/thumbnail/${e.type}/${e.title}.png`}
+                    className={`w-full ${e.space === 'wide' && 'md:col-span-3 sm:col-span-2'}`}
+                  />
+                );
+              } else {
+                return (
+                  <Image
+                    key={i}
+                    src={`/works/pamflet/${e.title}.png`}
+                    width={400}
+                    height={400}
+                    alt={e.title}
+                    className={`w-full ${e.space === 'wide' && 'md:col-span-3 sm:col-span-2'}`}
+                  />
+                );
+              }
+            })}
           </div>
         </section>
       </div>
