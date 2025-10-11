@@ -6,9 +6,9 @@ interface Works {
 
 export const works: Works[] = [
   {
-    title: 'gnine',
+    title: 'release_party',
     type: '3d',
-    space: 'wide'
+    space: 'narrow'
   },
   {
     title: 'maba_party',
@@ -19,6 +19,11 @@ export const works: Works[] = [
     title: 'chariot',
     type: '3d',
     space: 'narrow'
+  },
+  {
+    title: 'gnine',
+    type: '3d',
+    space: 'wide'
   },
   {
     title: 'soul_essence',
